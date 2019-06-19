@@ -8,6 +8,9 @@ import json
 
 from bunch import Bunch
 
+from root_dir import MODELS_DIR
+from utils.utils import mkdir_if_not_exist
+
 
 def get_config_from_json(json_file):
     """
@@ -21,13 +24,15 @@ def get_config_from_json(json_file):
     return config, config_dict
 
 
-def process_config(json_file):
+def init_config(json_file):
     """
     解析Json文件
     :param json_file: 配置文件
     :return: 配置类
     """
     config, _ = get_config_from_json(json_file)
+
+    mkdir_if_not_exist(MODELS_DIR)  # 初始化
     return config
 
 

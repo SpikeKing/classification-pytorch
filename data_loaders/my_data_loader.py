@@ -13,13 +13,13 @@ from root_dir import DATA_DIR
 
 
 class MyDataLoader(DataLoaderBase):
-    def __init__(self, config=None):
+    def __init__(self, input_size, config=None):
         super(MyDataLoader, self).__init__(config)
 
         print("[Info] Initializing Datasets and Dataloaders...")
 
-        input_size = 224
-        batch_size = 20
+        data_dir = DATA_DIR
+        batch_size = config.batch_size
 
         data_transforms = {
             'train': transforms.Compose([
@@ -36,7 +36,6 @@ class MyDataLoader(DataLoaderBase):
             ]),
         }
 
-        data_dir = DATA_DIR
         image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x), data_transforms[x]) for x in
                           ['train', 'val']}
         self.dataloaders_dict = {x: DataLoader(image_datasets[x], batch_size=batch_size, shuffle=True, num_workers=4)

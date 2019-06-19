@@ -1,7 +1,8 @@
 {
-  "exp_name": "simple_mnist",
-  "lr": 0.001,
-  "decay": 0.0,
-  "num_epochs": 10,
-  "batch_size": 64
+  "exp_name": "test",
+  "model_name": "squeezenet",
+  "feature_extract": 1,
+  "num_epochs": 20,
+  "batch_size": 16,
+  "lr": 0.001
 }

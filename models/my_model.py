@@ -26,14 +26,17 @@ class MyModel(ModelBase):
 
     def __init__(self, config):
         super(MyModel, self).__init__(config)
+        self.config = config
         self.build_model()
 
     def build_model(self):
-        model_name = "squeezenet"
+        model_name = self.config.model_name
+        feature_extract = True if self.config.feature_extract == 1 else False
+
         num_classes = 2
-        feature_extract = True
 
         model_ft, input_size = self.initialize_model(model_name, num_classes, feature_extract, use_pretrained=True)
+
         self.model = model_ft
         self.input_size = input_size
 

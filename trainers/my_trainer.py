@@ -14,16 +14,21 @@ import torch.nn as nn
 import torch.optim as optim
 
 from bases.trainer_base import TrainerBase
+from root_dir import MODELS_DIR
 
 
 class MyTrainer(TrainerBase):
     def __init__(self, model, data, config):
         super(MyTrainer, self).__init__(model, data, config)
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        print('[Info] device: {}'.format(self.device))
+
         self.model_ft = model
         self.dataloaders_dict = data
-        self.feature_extract = True
-        self.num_epochs = 15
+
+        self.feature_extract = True if config.feature_extract == 1 else False
+        self.num_epochs = config.num_epochs
+        self.lr = config.lr
 
     def train_model(self, model, dataloaders, criterion, optimizer, num_epochs=25, is_inception=False):
         since = time.time()
@@ -128,7 +133,7 @@ class MyTrainer(TrainerBase):
                     print("\t", name)
 
         # Observe that all parameters are being optimized
-        optimizer_ft = optim.SGD(params_to_update, lr=0.001, momentum=0.9)
+        optimizer_ft = optim.RMSprop(params_to_update, lr=self.lr)
 
         # Setup the loss fxn
         criterion = nn.CrossEntropyLoss()
@@ -137,3 +142,5 @@ class MyTrainer(TrainerBase):
         model_ft, hist = self.train_model(model_ft, self.dataloaders_dict, criterion, optimizer_ft,
                                           num_epochs=self.num_epochs,
                                           is_inception=False)
+
+        torch.save(model_ft, MODELS_DIR)  # 存储模型

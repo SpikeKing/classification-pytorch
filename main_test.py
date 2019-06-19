@@ -8,7 +8,7 @@ import numpy as np
 
 from data_loaders.simple_mnist_dl import SimpleMnistDL
 from infers.simple_mnist_infer import SimpleMnistInfer
-from utils.config_utils import process_config, get_test_args
+from utils.config_utils import init_config, get_test_args
 
 
 def main_test():
@@ -19,7 +19,7 @@ def main_test():
 
     try:
         args, parser = get_test_args()
-        config = process_config(args.config)
+        config = init_config(args.config)
         model_path = args.model
     except Exception as e:
         print '[Exception] 配置无效, %s' % e

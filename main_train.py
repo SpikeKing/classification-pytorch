@@ -14,7 +14,7 @@ import numpy as np
 from data_loaders.my_data_loader import MyDataLoader
 from models.my_model import MyModel
 from trainers.my_trainer import MyTrainer
-from utils.config_utils import process_config
+from utils.config_utils import init_config
 
 
 def main_train():
@@ -24,15 +24,15 @@ def main_train():
     :return:
     """
     print('[INFO] 解析配置...')
-    config = process_config('configs/my_config.json')
+    config = init_config('configs/my_config.json')
 
     np.random.seed(47)  # 固定随机数
 
-    print('[INFO] 加载数据...')
-    dl = MyDataLoader(config=config)
-
     print('[INFO] 构造网络...')
     model = MyModel(config=config)
+
+    print('[INFO] 加载数据...')
+    dl = MyDataLoader(input_size=model.input_size, config=config)
 
     print('[INFO] 训练网络...')
     trainer = MyTrainer(
