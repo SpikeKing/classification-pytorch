@@ -3,18 +3,11 @@
 Copyright (c) 2018. All rights reserved.
 Created by C. L. Wang on 2018/4/18
 """
-from __future__ import print_function
 from __future__ import division
-import torch
+from __future__ import print_function
+
 import torch.nn as nn
-import torch.optim as optim
-import numpy as np
-import torchvision
-from torchvision import datasets, models, transforms
-import matplotlib.pyplot as plt
-import time
-import os
-import copy
+from torchvision import models
 
 from bases.model_base import ModelBase
 

@@ -10,6 +10,9 @@ https://stackoverflow.com/questions/48340392/futurewarning-conversion-of-the-sec
 """
 
 import numpy as np
+import ssl
+
+ssl._create_default_https_context = ssl._create_unverified_context
 
 from data_loaders.my_data_loader import MyDataLoader
 from models.my_model import MyModel
@@ -23,26 +26,25 @@ def main_train():
 
     :return:
     """
-    print('[INFO] 解析配置...')
+    print('[Info] 解析配置...')
     config = init_config('configs/my_config.json')
 
     np.random.seed(47)  # 固定随机数
 
-    print('[INFO] 构造网络...')
+    print('[Info] 构造网络...')
     model = MyModel(config=config)
 
-    print('[INFO] 加载数据...')
+    print('[Info] 加载数据...')
     dl = MyDataLoader(input_size=model.input_size, config=config)
 
-    print('[INFO] 训练网络...')
+    print('[Info] 训练网络...')
     trainer = MyTrainer(
         model=model.model,
         data=dl.get_data_dict(),
         config=config)
     trainer.train()
-    print('[INFO] 训练完成...')
+    print('[Info] 训练完成...')
 
 
 if __name__ == '__main__':
     main_train()
-    # test_main()

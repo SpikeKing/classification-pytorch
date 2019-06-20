@@ -12,5 +12,7 @@ ROOT_DIR = os.path.dirname(os.path.abspath(__file__))  # 存储项目所在的�
 # DATA_DIR = '/Users/wang/workspace/data_set/'
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 
-DATASET = os.path.join(DATA_DIR, 'person-test')
+# DATASET = os.path.join(DATA_DIR, 'person-test')
+DATASET = '/Users/wang/workspace/data_set/person-test'
 MODELS_DIR = os.path.join(DATA_DIR, 'models')
+IMGS_DIR = os.path.join(DATA_DIR, 'imgs')

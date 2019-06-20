@@ -149,5 +149,3 @@ class MyTrainer(TrainerBase):
         model_ft, hist = self.train_model(model_ft, self.dataloaders_dict, criterion, optimizer_ft,
                                           num_epochs=self.num_epochs,
                                           is_inception=False)
-
-        torch.save(model_ft, MODELS_DIR)  # 存储模型
