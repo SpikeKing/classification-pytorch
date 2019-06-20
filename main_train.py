@@ -12,6 +12,7 @@ https://stackoverflow.com/questions/48340392/futurewarning-conversion-of-the-sec
 import numpy as np
 import ssl
 
+# Bugfix: 参考https://blog.csdn.net/sylmoon/article/details/78777770
 ssl._create_default_https_context = ssl._create_unverified_context
 
 from data_loaders.my_data_loader import MyDataLoader
