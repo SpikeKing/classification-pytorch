@@ -9,7 +9,7 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
 from bases.data_loader_base import DataLoaderBase
-from root_dir import DATA_DIR
+from root_dir import DATASET
 
 
 class MyDataLoader(DataLoaderBase):
@@ -18,7 +18,7 @@ class MyDataLoader(DataLoaderBase):
 
         print("[Info] Initializing Datasets and Dataloaders...")
 
-        data_dir = DATA_DIR
+        dataset_dir = DATASET
         batch_size = config.batch_size
 
         data_transforms = {
@@ -36,7 +36,7 @@ class MyDataLoader(DataLoaderBase):
             ]),
         }
 
-        image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x), data_transforms[x]) for x in
+        image_datasets = {x: datasets.ImageFolder(os.path.join(dataset_dir, x), data_transforms[x]) for x in
                           ['train', 'val']}
         self.dataloaders_dict = {x: DataLoader(image_datasets[x], batch_size=batch_size, shuffle=True, num_workers=4)
                                  for x in ['train', 'val']}
