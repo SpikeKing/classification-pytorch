@@ -104,8 +104,9 @@ class MyTrainer(TrainerBase):
                 if phase == 'val':
                     val_acc_history.append(epoch_acc)
 
+            # 存储模型
             save_path = os.path.join(MODELS_DIR, 'model_{}_{}.pth'.format(epoch, get_current_time_str()))
-            torch.save(model, save_path)  # 存储模型
+            torch.save(model, save_path)
             print()
 
         time_elapsed = time.time() - since
