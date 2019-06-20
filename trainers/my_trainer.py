@@ -9,12 +9,14 @@ from __future__ import print_function
 import copy
 import time
 
+import os
 import torch
 import torch.nn as nn
 import torch.optim as optim
 
 from bases.trainer_base import TrainerBase
 from root_dir import MODELS_DIR
+from utils.utils import get_current_time_str
 
 
 class MyTrainer(TrainerBase):
@@ -22,6 +24,8 @@ class MyTrainer(TrainerBase):
         super(MyTrainer, self).__init__(model, data, config)
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         print('[Info] device: {}'.format(self.device))
+
+        self.config = config
 
         self.model_ft = model
         self.dataloaders_dict = data
@@ -100,6 +104,8 @@ class MyTrainer(TrainerBase):
                 if phase == 'val':
                     val_acc_history.append(epoch_acc)
 
+            save_path = os.path.join(MODELS_DIR, 'model_{}_{}.pth'.format(epoch, get_current_time_str()))
+            torch.save(model, save_path)  # 存储模型
             print()
 
         time_elapsed = time.time() - since
